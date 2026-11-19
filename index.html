@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="my"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EFG – ပုဂံ ခရီးစဉ် ဖိတ်ကြားလွှာ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pinyon+Script&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --r:#4a0612;
+  --r2:#6e0b1d;
+  --g:#d4af37;
+  --g2:#f3dc8a;
+  --c:#f7efe2;
+  --m:#dff5ee;
+  --panel:rgba(74,6,18,.72);
+  --panel2:rgba(42,3,12,.68);
+  --line:rgba(212,175,55,.32);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--r);
+  color:var(--c);
+  font:400 16px/2 'Noto Sans Myanmar',sans-serif;
+  overflow-x:hidden;
+}
+
+#bg{position:fixed;inset:0;z-index:-2;background:var(--r) center/cover no-repeat}
+#bg::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 25%,rgba(110,11,29,.50),rgba(35,0,8,.92));
+}
+
+.lat{font-family:'Cinzel',serif}
+.gold{
+  background:linear-gradient(90deg,#b8902a,var(--g2),#b8902a);
+  background-size:200%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;animation:sh 5s linear infinite;
+}
+@keyframes sh{to{background-position:200%}}
+
+/* HERO */
+#hero{height:100svh;min-height:640px;position:relative;overflow:hidden;text-align:center}
+#hero h1{
+  position:absolute;top:7%;left:0;right:0;z-index:5;
+  font:500 clamp(24px,6.4vw,52px)/1.3 'Cinzel',serif;
+  letter-spacing:.06em;color:var(--m);
+  text-shadow:0 4px 18px #0009;
+  animation:fi 2s .2s both;
+}
+.hw{
+  position:absolute;left:50%;width:min(112vw,780px);z-index:3;
+  pointer-events:none;
+  transform:translate(-50%,calc(var(--p,0)*var(--k)*1px));
+}
+.hw img{width:100%;display:block;filter:drop-shadow(0 24px 30px #0009)}
+#h1{top:21%;--k:-.5}
+#h1 img{animation:in1 2.4s .5s cubic-bezier(.2,.8,.2,1) both}
+#h2{bottom:11%;--k:.5}
+#h2 img{animation:in2 2.4s .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in1{from{transform:translateY(-110vh) rotate(-8deg)}}
+@keyframes in2{from{transform:translateY(110vh) rotate(8deg)}}
+.date{
+  position:absolute;bottom:17%;left:0;right:0;z-index:5;
+  font:500 clamp(22px,5vw,38px) 'Cinzel',serif;color:#fff;
+  text-shadow:0 3px 14px #000a;animation:fi 2s 3s both;
+}
+.cue{
+  position:absolute;bottom:3.5%;left:50%;transform:translateX(-50%);z-index:5;
+  display:grid;justify-items:center;gap:6px;color:var(--g2);
+  font:12px 'Cinzel',serif;letter-spacing:.3em;
+  animation:fi 2s 3.6s both;text-decoration:none;
+}
+.ms{width:24px;height:38px;border:2px solid var(--g2);border-radius:14px;position:relative}
+.ms::after{
+  content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;
+  margin-left:-2px;background:var(--g2);border-radius:3px;animation:wh 1.6s infinite;
+}
+.ch{
+  width:10px;height:10px;border-right:2px solid var(--g2);border-bottom:2px solid var(--g2);
+  transform:rotate(45deg);animation:ch 1.6s infinite;
+}
+@keyframes wh{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(14px)}}
+@keyframes ch{0%,100%{opacity:.2;transform:translateY(0) rotate(45deg)}50%{opacity:1;transform:translateY(6px) rotate(45deg)}}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}}
+
+/* SECTIONS */
+.sec{position:relative;z-index:2;max-width:980px;margin:auto;padding:13vh 7vw}
+h2{
+  font:500 clamp(26px,5vw,42px)/1.5 'Noto Sans Myanmar',sans-serif;
+  text-align:center;margin-bottom:.2em;
+}
+.orn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:0 auto 38px;max-width:360px;
+}
+.orn::before,.orn::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--g));
+}
+.orn::after{transform:scaleX(-1)}
+.orn svg{width:120px;height:44px;overflow:visible;animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px) scale(1.06)}}
+
+/* ဘောင်များ */
+.glass,.day,.box,.pay,.clock,.hotel-card,.guest-section{
+  position:relative;isolation:isolate;
+  background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  box-shadow:0 20px 46px rgba(0,0,0,.38),inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+/* စက္ကူဖိတ်စာ */
+.tk{
+  position:relative;background:linear-gradient(#fbf5ea,#f2e6d2);
+  color:var(--r2);border-radius:16px;padding:46px 28px 38px;
+  text-align:center;box-shadow:0 30px 60px #0008;
+}
+.tk::before,.tk::after{
+  content:"";position:absolute;left:0;right:0;height:14px;
+  background:radial-gradient(circle,var(--r) 5px,transparent 6px) 0 0/20px 14px repeat-x;
+}
+.tk::before{top:-7px}
+.tk::after{bottom:-7px}
+.tk h3{font:400 clamp(30px,7vw,52px)/1.4 'Noto Sans Myanmar';font-weight:600;margin:6px 0 10px}
+.tk .row{
+  display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--r2);
+  margin-top:22px;padding-top:16px;font:600 clamp(18px,4vw,26px) 'Cinzel',serif;
+}
+.tk .row div+div{border-left:1px solid var(--r2)}
+.tk small{display:block;font:400 13px 'Noto Sans Myanmar';opacity:.8}
+
+/* COUNTDOWN */
+.clock{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(8px,2vw,18px);
+  padding:clamp(16px,4vw,30px);border-radius:26px;
+}
+.cu{
+  position:relative;text-align:center;
+  padding:clamp(12px,3vw,22px) 4px;border-radius:18px;
+  background:rgba(35,0,8,.38);
+  border:1px solid rgba(212,175,55,.28);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+  min-width:0;
+}
+.cu b{
+  display:block;font:700 clamp(22px,6.4vw,50px)/1.05 'Cinzel',serif;
+  font-variant-numeric:tabular-nums;letter-spacing:.01em;
+  background:linear-gradient(180deg,#fff9e6,var(--g2) 46%,#b8902a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cu span{
+  display:block;margin-top:6px;
+  font:400 12px/1.5 'Noto Sans Myanmar';
+  color:rgba(243,239,230,.76);letter-spacing:.04em;
+}
+.cdnote{text-align:center;margin-top:20px;font-size:14px;color:rgba(243,239,230,.78)}
+.cdnote b{color:var(--g2);font-family:'Cinzel',serif;letter-spacing:.06em}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:34px}
+.tl::before{
+  content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;
+  background:linear-gradient(var(--g),transparent);
+  transform-origin:top;transform:scaleY(var(--ln,0));
+}
+.day{position:relative;margin-bottom:60px;padding:28px 24px;border-radius:20px}
+.day>.dt{
+  position:absolute;left:-35px;top:34px;width:14px;height:14px;border-radius:50%;
+  background:var(--g);box-shadow:0 0 0 6px #d4af3733;
+}
+.day .d{font:700 clamp(28px,6vw,44px)/1.2 'Cinzel',serif}
+.day h3{font-size:22px;font-weight:600;margin:4px 0 8px}
+.day p{text-align:justify;opacity:.93}
+.pill{
+  display:inline-block;margin:12px 8px 0 0;padding:2px 14px;
+  border:1px solid var(--g);border-radius:99px;color:var(--g2);
+  font:13px/1.8 'Cinzel',serif;
+}
+
+/* DAY PHOTOS */
+.ph{display:grid;grid-template-columns:1fr;gap:16px;margin:24px -8px 0}
+.ph img{
+  width:100%;object-fit:cover;border-radius:18px;display:block;
+  background:linear-gradient(135deg,#7d1527,#3a0510);
+  border:2px solid var(--g);outline:1px solid #d4af3777;outline-offset:5px;
+  box-shadow:0 16px 34px #000a;
+}
+.ph img:first-child{aspect-ratio:16/11}
+.ph img:nth-child(2){
+  max-width:72%;
+  justify-self:center;
+  aspect-ratio:16/10;
+}
+
+/* BOXES */
+.two,.pr{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pr{margin-top:26px}
+.box{padding:26px;border-radius:20px}
+.box h3{font-size:20px;margin-bottom:8px}
+.box li{list-style:none;padding-left:30px;position:relative;line-height:1.8;margin:8px 0}
+.box.y li::before{content:"✓";color:#7be0a0}
+.box.n li::before{content:"✕";color:#ff8a8a}
+.box li::before{position:absolute;left:0;font-weight:700}
+.pc{
+  text-align:center;padding:34px 16px;border-radius:20px;
+  background:linear-gradient(160deg,#fbf5ea,#ecdcc0);color:var(--r2);
+  box-shadow:0 20px 50px #0008;transition:transform .5s;
+}
+.pc:hover{transform:translateY(-8px) rotate(-1deg)}
+.pc b{display:block;font:700 clamp(26px,5vw,38px) 'Cinzel',serif}
+
+/* HOTEL CARD */
+.hotel-card{
+  margin-top:44px;
+  border-radius:22px;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  align-items:stretch;
+}
+.hotel-img{
+  position:relative;
+  padding:14px;
+  min-height:280px;
+}
+.hotel-img img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:16px;
+  border:2px solid var(--g);
+  outline:1px solid #d4af3777;
+  outline-offset:4px;
+  box-shadow:0 18px 38px #000a;
+  display:block;
+}
+.hotel-info{
+  padding:34px 26px;
+  display:flex;flex-direction:column;justify-content:center;
+  text-align:center;
+}
+.hotel-info small{
+  display:block;
+  font:400 12px 'Noto Sans Myanmar';
+  color:rgba(243,239,230,.72);
+  letter-spacing:.24em;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.hotel-info h3{
+  font-size:clamp(22px,3.4vw,30px);
+  letter-spacing:.08em;margin-bottom:14px;
+}
+.hotel-info p{
+  font-size:14px;line-height:1.9;
+  color:rgba(243,239,230,.8);
+}
+
+/* PAY */
+.pay{
+  width:100%;text-align:center;max-width:460px;margin:auto;
+  padding:36px 26px;border-radius:24px;
+}
+.qr{
+  width:100%;max-width:330px;min-height:140px;
+  margin:20px auto;padding:10px;
+  background:linear-gradient(#fff,#f6efe6);
+  border-radius:18px;border:2px solid var(--g);
+  box-shadow:0 12px 28px rgba(0,0,0,.35);
+  display:grid;place-items:center;
+  color:var(--r2);font:700 20px 'Cinzel',serif;
+  overflow:hidden;
+}
+.qr img{width:100%;height:auto;display:block;border-radius:10px}
+input{
+  width:100%;padding:15px 20px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.10);
+  color:#fff;font:inherit;text-align:center;outline:0;transition:.3s;
+}
+input::placeholder{color:rgba(255,255,255,.55)}
+input:focus{box-shadow:0 0 0 4px #d4af3744;background:rgba(0,0,0,.18)}
+button{
+  margin-top:14px;padding:14px 44px;border:0;border-radius:99px;
+  font:600 17px 'Noto Sans Myanmar';color:#4a0612;
+  background:linear-gradient(90deg,#c9a02e,var(--g2),#c9a02e);
+  background-size:200%;cursor:pointer;transition:.4s;
+}
+button:hover{background-position:100%;transform:scale(1.05)}
+button:disabled{opacity:.6}
+#msg{margin-top:14px;min-height:30px;color:var(--g2)}
+#msg a{color:var(--g2)}
+
+/* GUEST LIST */
+.guest-section {
+  margin-top: 34px;
+  border-radius: 24px;
+  padding: 30px 24px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.guest-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--g2);
+}
+.names-list {
+  list-style: none;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.names-list::-webkit-scrollbar {
+  width: 6px;
+}
+.names-list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+.names-list::-webkit-scrollbar-thumb {
+  background: var(--g);
+  border-radius: 10px;
+}
+.guest-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 16px;
+  transition: background .3s, transform .3s;
+  animation: slideIn 0.4s ease both;
+}
+.guest-item:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateX(4px);
+}
+.guest-num {
+  font: 600 13px 'Cinzel', serif;
+  color: var(--g2);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: rgba(212,175,55,0.15);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.guest-info {
+  flex: 1;
+  min-width: 0;
+}
+.guest-name {
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--c);
+}
+.guest-time {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: 2px;
+  font-family: 'Noto Sans Myanmar', sans-serif;
+}
+.guest-check {
+  color: #7be0a0;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.empty-msg {
+  text-align: center;
+  padding: 24px;
+  color: rgba(243,239,230,.6);
+  font-style: italic;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* FOOTER */
+.ft{position:relative;z-index:2;text-align:center;padding:40px 7vw 190px;font-size:14px;opacity:.95}
+
+/* FLOWERS */
+.sf{
+  position:fixed;bottom:-4px;z-index:1;pointer-events:none;
+  height:min(66vh,560px);transform-origin:50% 100%;
+  transform:scale(var(--gr,.85));
+}
+.sf img{
+  height:100%;display:block;transform-origin:50% 100%;
+  animation:sw 5s ease-in-out infinite alternate;
+}
+#f1{left:-16vw}
+#f2{right:-16vw}
+#f2 img{animation-duration:6.5s;animation-delay:-2s}
+@keyframes sw{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
+.f3{
+  position:absolute;left:50%;bottom:0;width:min(100%,900px);
+  transform:translateX(-50%);z-index:1;pointer-events:none;
+}
+.f3 img{
+  width:100%;display:block;transform-origin:50% 100%;
+  animation:sw 7s ease-in-out infinite alternate;
+}
+.br{
+  position:absolute;width:clamp(54px,10vw,120px);aspect-ratio:1/4;
+  pointer-events:none;z-index:0;transform-origin:50% 100%;
+}
+.br svg{
+  width:100%;height:100%;overflow:visible;transform-origin:50% 100%;
+  animation:sw 6s ease-in-out infinite alternate;
+}
+.br.a{left:0;bottom:3%}
+.br.b{right:0;top:7%;scale:-1 1}
+.pt{
+  position:fixed;top:-6vh;width:10px;height:14px;
+  border-radius:70% 0 70% 0;
+  background:radial-gradient(#d12a47,#7a0c22);
+  opacity:.75;z-index:1;pointer-events:none;
+  animation:fall linear infinite;
+}
+@keyframes fall{to{transform:translate3d(var(--x),112vh,0) rotate(720deg)}}
+
+/* PROGRESS */
+#pg{
+  position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  z-index:60;width:min(74vw,340px);
+  display:flex;align-items:center;gap:12px;
+  padding:8px 14px 8px 20px;border-radius:99px;
+  background:rgba(74,6,18,.88);
+  border:1px solid rgba(212,175,55,.32);
+  box-shadow:0 14px 34px rgba(0,0,0,.45);
+  opacity:0;transform:translate(-50%,24px);
+  transition:opacity .6s,transform .6s;
+}
+#pg.on{opacity:1;transform:translateX(-50%)}
+.tr{flex:1;height:5px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden}
+#bar{height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#d9446f,var(--g2))}
+#pl{width:42px;height:27px;flex:none;transition:filter .6s}
+#pl svg{width:100%;height:100%;overflow:visible}
+#pl.full{filter:drop-shadow(0 0 8px #ff9fb8) drop-shadow(0 0 18px #f3dc8a);animation:pu 2s infinite}
+@keyframes pu{50%{transform:scale(1.3)}}
+
+/* WREATH + LOTUS */
+#wr{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.wd{
+  position:absolute;translate:-50% -50%;
+  animation:bloom 1.9s cubic-bezier(.2,.9,.3,1.25) both;
+}
+.wd svg{
+  width:100%;height:100%;overflow:visible;
+  animation:sw2 4.5s ease-in-out infinite alternate;
+  filter:drop-shadow(0 6px 10px #0008);
+}
+@keyframes bloom{from{transform:scale(0) rotate(-140deg);opacity:0}}
+@keyframes sw2{from{transform:rotate(-7deg) scale(.97)}to{transform:rotate(7deg) scale(1.03)}}
+.hf{z-index:2;transform-origin:50% 100%;animation:rise 2.2s 1.4s cubic-bezier(.2,.9,.3,1) both}
+@keyframes rise{from{transform:translateX(-50%) scale(.3);opacity:0}}
+#lotus{
+  position:fixed;top:0;left:0;width:clamp(56px,12vw,96px);aspect-ratio:1;
+  z-index:7;pointer-events:none;
+  filter:drop-shadow(0 0 14px #ff9fb8aa);
+  animation:fo 2s 3.6s both;will-change:transform;
+}
+#lotus svg{width:100%;height:100%}
+@keyframes fo{from{opacity:0}}
+.sp{
+  position:fixed;bottom:-10px;width:3px;height:3px;border-radius:50%;
+  background:var(--g2);box-shadow:0 0 8px 2px #f3dc8a99;
+  opacity:0;z-index:1;pointer-events:none;
+  animation:up linear infinite;
+}
+@keyframes up{10%{opacity:.9}to{transform:translateY(-110vh);opacity:0}}
+
+/* REVEAL */
+[data-a]{opacity:0;transition:opacity 1.3s,transform 1.3s cubic-bezier(.2,.7,.2,1),filter 1.3s}
+[data-a=up]{transform:translateY(70px)}
+[data-a=l]{transform:translateX(-90px)}
+[data-a=r]{transform:translateX(90px)}
+[data-a=z]{transform:scale(.75)}
+[data-a=b]{filter:blur(16px);transform:scale(1.08)}
+[data-a=g]{transform:scale(.2)}
+[data-a=f]{transform:perspective(800px) rotateX(-45deg) translateY(40px);transform-origin:top}
+[data-a=c]{clip-path:inset(0 100% 0 0);transform:none;transition:opacity .6s,clip-path 1.4s cubic-bezier(.7,0,.2,1)}
+[data-a].in{opacity:1;transform:none;filter:none;clip-path:none}
+[data-a=c].in{clip-path:inset(0)}
+.br[data-a].in{transition-duration:2s}
+
+@media(max-width:720px){
+  .day,.box,.pay,.guest-section{border-radius:16px}
+  .pay{padding:30px 18px}
+  .two,.pr{grid-template-columns:1fr}
+  .sf{height:36vh}
+  #f1{left:-23vw}
+  #f2{right:-23vw}
+  .day{padding:22px 12px}
+  .ph{margin:20px -2px 0}
+  .ph img:nth-child(2){max-width:88%}
+  .tl{padding-left:26px}
+  .day>.dt{left:-27px}
+  .br{opacity:.55!important}
+  .clock{border-radius:18px}
+  .cu span{font-size:11px}
+  .hotel-card{grid-template-columns:1fr}
+  .hotel-img{padding:14px;min-height:220px}
+  .hotel-info{padding:22px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-a]{opacity:1;transform:none;filter:none;clip-path:none}
+}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<g id="rg"><circle r="20" fill="#7a0c22"/><path d="M0-19C12-14 20-4 17 8 14 17 4 21-6 18-16 14-19 2-14-8-10-15-5-18 0-19z" fill="#a3142f"/><path d="M0-10C7-8 12-2 10 5 8 10 2 12-3 10-9 8-10 0-7-5-5-8-3-9 0-10z" fill="#c1213f"/><circle r="4" fill="#8c0f27"/><path d="M-6-1C-3-6 4-6 6-1" stroke="#ee6a82" fill="none" stroke-width="1.5"/></g>
+<g id="lf"><path d="M0 0C-12-14-12-36 0-54 12-36 12-14 0 0z" fill="#2f5d3a" stroke="#d4af37" stroke-width=".8"/><path d="M0 0V-48" stroke="#6fae7b" stroke-width="1"/></g>
+</defs></svg>
+
+<div id="bg"></div>
+<div id="lotus"></div>
+<div id="pg"><div class="tr"><div id="bar"></div></div><div id="pl"></div></div>
+<div id="fl"></div>
+<div class="sf" id="f1"><img data-d="1vV058miOQEDdx5Vg-mPF_xFnxrm0nBq3" alt=""></div>
+<div class="sf" id="f2"><img data-d="1qc2gu0PB2aaUbz4bUsEt0JG_YDq6xRp8" alt=""></div>
+
+<section id="hero">
+  <div id="wr"></div>
+  <h1>EFG<br>INTERNATIONAL<br>PRIMARY SCHOOL</h1>
+  <div class="hw" id="h1"><img data-d="1Fp12yvG_XJ-l7IGknYQbfV0EVtfDV5B9" alt=""></div>
+  <div class="hw" id="h2"><img data-d="" alt=""></div>
+  <div class="date">30 / Dec / 2026</div>
+  <div class="f3 hf"><img data-d="1HtXlxxnZH28hSO3OpaQjYanPEF4fnQvA" alt=""></div>
+  <a class="cue" href="#cd"><span>SCROLL</span><i class="ms"></i><i class="ch"></i></a>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="sec" id="cd">
+  <h2 class="gold" data-a="b">ခရီးစဉ် စတင်ရန် ကျန်ရှိသေးသော အချိန်</h2>
+  <div class="orn" data-a="z">ORN</div>
+  <div class="clock glass" data-a="z">
+    <div class="cu"><b id="cdD">00</b><span>ရက်</span></div>
+    <div class="cu"><b id="cdH">00</b><span>နာရီ</span></div>
+    <div class="cu"><b id="cdM">00</b><span>မိနစ်</span></div>
+    <div class="cu"><b id="cdS">00</b><span>စက္ကန့်</span></div>
+  </div>
+  <p class="cdnote" data-a="up"><b>30 DEC 2026</b> · ည ၆:၃၀ နာရီ · ရန်ကုန်မှ စတင်ထွက်ခွာ</p>
+</section>
+
+<section class="sec" id="inv">
+  <div class="tk" data-a="f">
+    <p class="lat" style="letter-spacing:.3em;font-size:13px">INVITATION</p>
+    <h3>ပုဂံ ခရီးစဉ် ဖိတ်ကြားလွှာ</h3>
+    <p>ပုဂံ (စွယ်တော် ၃ ဆူ) – ပြည့် ၅ ပြည့် – မင်နန်းသူရွာ</p>
+    <div class="row"><div><small>စတင်ထွက်ခွာမည့်ရက်</small>30 Dec 2026</div><div><small>ပြန်ရောက်မည့်ရက်</small>02 Jan 2027</div></div>
+    <p style="margin-top:18px;font-size:14px">EFG International Primary School · &amp; Tours</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2 class="gold" data-a="b">ခရီးစဉ်အစီအစဉ်</h2><div class="orn" data-a="z">ORN</div>
+  <div class="tl" id="tl"></div>
+</section>
+
+<section class="sec">
+  <h2 class="gold" data-a="b">ပါဝင်မှုများ</h2><div class="orn" data-a="z">ORN</div>
+  <div class="two">
+    <div class="box y glass" data-a="l"><h3>ခရီးစဉ်တွင် ပါဝင်သည့် ဝန်ဆောင်မှုများ</h3><ul>
+      <li>33 / 49 SEATER CAR (2+2)</li><li>Royal Palace Hotel</li><li>30 ရက်နေ့ ညစာ</li><li>31 ရက်နေ့ မနက်စာ</li><li>31 ရက်နေ့ နေ့လည်စာ</li><li>31 ရက်နေ့ Snack time (မြန်မာ့ရိုးရာ မုန့်မျိုးစုံ)</li><li>31 ရက်နေ့ ညစာ</li><li>1 ရက်နေ့ မနက်စာ</li><li>1 ရက်နေ့ နေ့လည်စာ</li><li>1 ရက်နေ့ Snack time (မြန်မာ့ရိုးရာ အကြော်စုံ)</li><li>1 ရက်နေ့ ညစာ</li><li>2 ရက်နေ့ မနက်စာ</li><li>2 ရက်နေ့ နေ့လည်စာ</li><li>2 ရက်နေ့ Snack time </li><li>2 ရက်နေ့ ညစာ</li><li>ရေသန့်၊ တဘက်၊ သွားပွတ်တံ/ဆေး၊ ဆေးဝါး</li></ul></div>
+    <div class="box n glass" data-a="r"><h3>ခရီးစဉ်တွင် မပါဝင်သော ဝန်ဆောင်မှုများ</h3><ul>
+      <li>ကျန်းမာရေးအာမခံ</li><li>ဟိုတယ်နှင့် စားသောက်ဆိုင်များတွင် အပို မှာယူသော ရေသန့်၊ အအေး၊ အဖျော်ယမကာများ</li></ul></div>
+  </div>
+  <div style="height:60px"></div>
+  <h2 class="gold" data-a="b">ခရီးစဉ်ကြေး</h2><div class="orn" data-a="z">ORN</div>
+  <div class="pr">
+    <!-- <div class="pc" data-a="l"><small>BASE ON 46 PAX</small><b><span data-n="525000">0</span> MMK</b></div> -->
+    <div class="pc" data-a="r"><small> One Student</small><b><span data-n="780000">0</span> MMK</b></div>
+  </div>
+
+  <!-- HOTEL CARD -->
+  <div class="hotel-card" data-a="up">
+    <div class="hotel-img">
+      <img src="https://lh3.googleusercontent.com/d/10Ninfz0PpiwCsps4n2eu8Es2qleZyq59" alt="Royal Palace Hotel">
+    </div>
+    <div class="hotel-info">
+      <small>တည်းခိုမည့်ဟိုတယ်</small>
+      <h3 class="gold lat">ROYAL PALACE HOTEL</h3>
+      <p>ပုဂံရှိ ခမ်းနားသော ဟိုတယ်တွင် သက်တောင့်သက်သာ တည်းခိုပါမည်။</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pay">
+  <h2 class="gold" data-a="b">ခရီးစဉ်လိုက်ရန်</h2><div class="orn" data-a="z">ORN</div>
+  
+  <div class="pay glass" data-a="z">
+    <p>ငွေလွှဲပြီးပါက အောက်တွင် လိုက်မည့် ကျောင်းသာ/သူ ၏ အမည်ကို ဖြည့်၍ ပို့ပေးပါ။</p>
+    <div class="qr" id="qr">QR</div>
+    <input id="nm" placeholder="လိုက်မည့်သူ၏ အမည်" autocomplete="name" aria-label="အမည်">
+    <button id="sb" type="button">ပို့မည်</button>
+    <div id="msg" role="status"></div>
+  </div>
+
+  <!-- GUEST LIST (အသစ်ထည့်ထားသော စာရင်း) -->
+  <div class="guest-section glass" data-a="up">
+    <h3 class="guest-title gold">ပုဂံခရီးစဥ် လိုက်မည့်သားသား မီးမီးလေးများ</h3>
+    <ul class="names-list" id="names-list">
+      <li class="empty-msg">စာရင်းကို ရယူနေပါသည်...</li>
+    </ul>
+  </div>
+
+</section>
+
+<div class="ft">
+  <p class="gold lat" style="font-size:20px;letter-spacing:.1em">A9 GLOBAL TRAVELS &amp; TOURS</p>
+  <p>Dagon Seikkan 1, 09956103737</p>
+  <p>EFG International Preschool (Dagon Seikkan Campus)<br>
+No.3,Yuza tret,Chin Twin Yeikmon Housing, Yuzana Garden City,<br>
+Dagon Sia Tonship, Yangon. 09 956103737.</p>
+  <p>EFG International Preschool(North Dagon Campus)<br>
+No.1385, Bayint Naung Road, 43 Ward, North Dagon Township,<br>
+Yangon. 09 977478208,09420189091.</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___<h6>Sponsored by Mr.Zion</h6>___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+<p>___*___</p>
+  <div class="f3"><img data-d="1HtXlxxnZH28hSO3OpaQjYanPEF4fnQvA" alt=""></div>
+</div>
+<iframe name="ifr" hidden></iframe>
+
+<script>
+const BG="1OCqg7Pn4ZOyU4hhY7hzLvm1c734rL3tu";
+const QR_DRIVE="1_s-62Xt_H2jXv2a84KrXqcV3o9umiYPy";
+const MAIL="myatsupaing28@gmail.com";
+const SHEET_URL="https://script.google.com/macros/s/AKfycby0F2TROcIwFijJ2ceC5Tne4qDG2kFLfYUaisyAjFvmiQxPURNgG4a1TTiVw_Oea5Thow/exec";
+const D=id=>"https://lh3.googleusercontent.com/d/"+id;
+
+const DAYS=[
+["DEC 30","ရန်ကုန် – ပုဂံ","(-/-/-)","ကျောင်းသို့ ညနေ 5 နာရီ အရောက် လာပို့ပေးရမည်ဖြစ်ပြီး၊ ညနေ 6 နာရီတွင် ကားများစတင်ထွက်ခွာမည်။ ထို့နောက် 39 မိုင်ရှိစားသောက်ဆိုင်တွင် ညစာသုံးဆောင်ပါမည်။","Ovt : on the way",
+ "19a0DN4-6AXqRy2YSpsNDeHPFiF_DCIcv",
+ "19rpPOimFfp_nrUjfz-FetTG5qoUgMbid"],
+["DEC 31","ပုဂံ လည်ပတ်ခြင်း","(B/L/D)","နံနက်စာကို ကျောက်ပန်းတောင်းရှိ စားသောက်ဆိုင်တွင် သုံးဆောင်ပြီးနောက် ပုဂံသို့ ဆက်လက်ထွက်ခွာကာ အလိုတော်ပြည့်ဂူဘုရား၊ ထီးလိုမင်းလိုဘုရား၊ အာနန္ဒာဘုရား၊ သဗ္ဗညုဘုရား၊ ဓမ္မရံကြီးဘုရားများကို ဖူးမြော်ပါမည်။ နေ့လည်စာကို မြန်မာစာဘူဖေး ဖြင့် သုံးဆောင်ပြီး ဟိုတယ် Check In ဝင်ကာ ခေတ္တအနားယူပြီး နေ့လည်မုန့်စားပါမည်။ နေ့လည် ၃ နာရီခန့်တွင် ပုဂံရှိ အထင်ကရဘုရားများ ဖူးမြော်ပြီး ညနေ နေဝင်ဆည်းဆာအလှကို ဗူးဘုရားမှ ကြည့်ခံစားပါမည်။ ညစာကို မြန်မာစာဘူဖေးဖြင့် သုံးဆောင်ပြီး ဟိုတယ်တွင် အိပ်စက်အနားယူပါမည်။","Ovt : Hotel",
+ "1UUmDlA8O8gKZQqGDVbhHDhsfkmh731jw",
+ "16TaSMTS_CcHa5hDQOpgOSZ-017EHlkyI"],
+["JAN 1","ပြည့် ၅ ပြည့် · မင်နန်းသူရွာ","(B/L/D)","ဟိုတယ်တွင် နံနက်စာသုံးဆောင်ပြီးနောက် စွယ်တော် ၃ ဆူဖြစ်သော တုရင်းတောင်၊ လောကနန္ဒာ၊ ရွှေစည်းခုံ ဘုရားများကို ဖူးမြော်ပြီး အနီးရှိဘုရားများကိုပါ ဖူးမြော်ပါမည်။ နေ့လည်စာကို မြန်မာစာဘူဖေးဖြင့် သုံးဆောင်ပြီးနောက် မင်နန်းသူရွာသို့ သွားရောက်ကာ ပုဂံကျေးလက်လူနေထိုင်မှုဘဝ၊ ရိုးရာလုပ်ငန်းများဖြစ်ကြသော ယွန်းထည်၊ ဆုံဆီကိတ်၊ ဆေးလိပ်လိပ်၊ သဲပန်းချီလုပ်ငန်းတို့ကို လေ့လာကြပါမည်။ ထို့နောက် နေ့လည် Snack time တွင် အကြော်စုံ စားသုံးပါမည်။ ညနေပိုင်းတွင် ရွှေဆံတော်၊ လောကနန္ဒာ၊ တာမဏီသိမ်၊ ဓမ္မရာဇကစေတီတော် အရှေ့ဘက်အရံဂူနှင့် တောင်ဘက်အရံဂူတို့ရှိ ပြည့်ဆုတောင်း ရုပ်ပွားတော်များကို ဖူးမြော်ပါမည်။ ညစာကို မြန်မာစာဘူဖေးဖြင့် သုံးဆောင်ပြီး ဟိုတယ်တွင် အိပ်စက်အနားယူပါမည်။","Ovt : Hotel",
+ "1dq7hPPQRUsNFTRpYgnbICtmXaM-b_yUU",
+ "1m_IvvbAnxfeKde2X-udbIDa76O4LWHy3"],
+["JAN 2","ပုဂံ – ရန်ကုန်","(B/L/-)","နံနက်စာကို ဟိုတယ်တွင် သုံးဆောင်ပြီးနောက် Hotel Check Out ထွက်ကာ ရန်ကုန်သို့ ပြန်လည်ထွက်ခွာပါမည်။ နေ့လည်စာကို ၂၈၅ မိုင်ရှိ စားသောက်ဆိုင်တွင် မြန်မာဖတ်ထမင်းဖြင့် သုံးဆောင်ပြီးနောက် ရန်ကုန်သို့ ဆက်လက်ထွက်ခွာမည်။ ထို့နောက်လမ်းတွင် ညစာသုံးဆောင်ပါမည်။","",
+ "1E_RrC49iSlRv4K7bT0FriIMQ_6M0zVYK",
+ "1n4DP2uGU4qrKrSxRnPD4WCMNn8EeBVg5"]
+];
+
+/* BUILD */
+document.getElementById("bg").style.backgroundImage=`url(${D(BG)})`;
+
+document.getElementById("tl").innerHTML=DAYS.map((x,k)=>
+`<article class="day glass" data-a="${k%2?"r":"l"}">
+  <i class="dt"></i>
+  <div class="d gold">${x[0]}</div>
+  <h3>${x[1]}</h3>
+  <p>${x[3]}</p>
+  <span class="pill">${x[2]}</span>${x[4]?`<span class="pill">${x[4]}</span>`:""}
+  <div class="ph">
+    <img data-a="z" style="transition-delay:.05s" src="${D(x[5])}" alt="${x[1]} – ပုံအကြီး" loading="lazy">
+    <img data-a="c" style="transition-delay:.25s" src="${D(x[6])}" alt="${x[1]} – ပုံအသေး" loading="lazy">
+  </div>
+</article>`
+).join("");
+
+document.querySelectorAll("img[data-d]").forEach(i=>{
+  const id=i.dataset.d;
+  if(!id){i.remove();return}
+  i.src=D(id);
+  i.onerror=()=>{i.style.opacity=.3};
+});
+
+/* Hotel image fallback */
+document.querySelectorAll(".hotel-img img").forEach(i=>{
+  i.onerror=()=>{i.style.opacity=.3;};
+});
+
+const qi=document.getElementById("qr");
+const q=new Image();
+q.alt="QR";
+q.src=D(QR_DRIVE);
+q.onload=()=>{qi.textContent="";qi.appendChild(q)};
+q.onerror=()=>{qi.textContent="QR";};
+
+const ORN='<svg viewBox="-60 -24 120 44"><use href="#lf" transform="translate(-14 6) rotate(-75)"/><use href="#lf" transform="translate(14 6) rotate(75)"/><use href="#lf" transform="translate(-8 8) rotate(-35) scale(.7)"/><use href="#lf" transform="translate(8 8) rotate(35) scale(.7)"/><use href="#rg" transform="scale(.9)"/><use href="#rg" transform="translate(-40 4) scale(.45)"/><use href="#rg" transform="translate(40 4) scale(.45)"/></svg>';
+document.querySelectorAll(".orn").forEach(o=>o.innerHTML=ORN);
+
+function branch(){
+  const L=[[40,345,-60],[62,295,60],[40,230,-65],[58,165,60],[52,100,-50],[52,45,40]],
+        R=[[28,310,.95],[66,205,1.05],[38,125,.9],[50,20,.7]];
+  return`<svg viewBox="0 0 100 400"><path d="M50 400C18 340 82 280 44 210S72 90 50 8" fill="none" stroke="#2f5d3a" stroke-width="3"/>${L.map(a=>`<use href="#lf" transform="translate(${a[0]} ${a[1]}) rotate(${a[2]})"/>`).join("")}${R.map(a=>`<use href="#rg" transform="translate(${a[0]} ${a[1]}) scale(${a[2]})"/>`).join("")}</svg>`;
+}
+
+const fl=document.getElementById("fl");
+for(let i=0;i<22;i++){
+  const p=document.createElement("i");
+  p.className="pt";
+  p.style.cssText=`left:${Math.random()*100}vw;--x:${Math.random()*160-80}px;animation-duration:${9+Math.random()*10}s;animation-delay:-${Math.random()*16}s;transform:scale(${.6+Math.random()*.9})`;
+  fl.appendChild(p);
+}
+
+/* wreath, lotus, sparkles */
+const wr=document.getElementById("wr"),N=22;
+for(let i=0;i<N;i++){
+  const a=i/N*Math.PI*2+.2,c=Math.cos(a),sn=Math.sin(a),
+        px=50+60*Math.sign(c)*Math.pow(Math.abs(c),.55),
+        py=50+57*Math.sign(sn)*Math.pow(Math.abs(sn),.55),
+        z=Math.max(64,innerWidth*.14)*(.8+Math.random()*.8),
+        dg=Math.atan2(sn,c)*180/Math.PI+90;
+  const d=document.createElement("div");
+  d.className="wd";
+  d.style.cssText=`left:${px}%;top:${py}%;width:${z}px;height:${z}px;animation-delay:${1.2+i*.1}s`;
+  d.innerHTML=`<svg viewBox="-50 -50 100 100" style="${i%4==0?"filter:saturate(.3) brightness(1.7);":""}animation-delay:-${i}s"><use href="#lf" transform="rotate(${dg-42}) scale(.8)"/><use href="#lf" transform="rotate(${dg+42}) scale(.8)"/><use href="#rg" transform="scale(1.5)"/></svg>`;
+  wr.appendChild(d);
+}
+
+const lo=document.getElementById("lotus");
+let L='<svg viewBox="-64 -64 128 128"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3ea"/><stop offset="1" stop-color="#d9446f"/></linearGradient></defs>';
+const P="M0 0C-16-18-12-46 0-62 12-46 16-18 0 0Z";
+for(let k=0;k<8;k++)L+=`<path transform="rotate(${k*45})" d="${P}" fill="url(#lg)" opacity=".8"/>`;
+for(let k=0;k<8;k++)L+=`<path transform="rotate(${k*45+22.5}) scale(.8)" d="${P}" fill="url(#lg)" stroke="#fff7" stroke-width=".8"/>`;
+for(let k=0;k<6;k++)L+=`<path transform="rotate(${k*60}) scale(.5)" d="${P}" fill="#ffd0dc"/>`;
+lo.innerHTML=L+'<circle r="7" fill="#f3dc8a"/></svg>';
+
+for(let i=0;i<30;i++){
+  const e=document.createElement("i");
+  e.className="sp";
+  e.style.cssText=`left:${Math.random()*100}vw;animation-duration:${8+Math.random()*10}s;animation-delay:-${Math.random()*14}s`;
+  fl.appendChild(e);
+}
+
+const pg=document.getElementById("pg"),pl=document.getElementById("pl"),
+      pP="M0 0C-14-16-10-42 0-60 10-42 14-16 0 0Z";
+let PL='<svg viewBox="-64 -66 128 78"><defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3ea"/><stop offset="1" stop-color="#e0527a"/></linearGradient></defs><ellipse cx="0" cy="6" rx="46" ry="5" fill="#2f5d3a" opacity=".9"/>';
+for(let k=0;k<7;k++)PL+=`<path class="pp" data-g="${(k-3)*24}" data-sc="1" d="${pP}" fill="url(#pg2)" stroke="#fff8" stroke-width="1"/>`;
+for(let k=0;k<5;k++)PL+=`<path class="pp" data-g="${(k-2)*20}" data-sc=".7" d="${pP}" fill="#ffd0dc" stroke="#fff8" stroke-width="1"/>`;
+pl.innerHTML=PL+'<circle cy="-6" r="5" fill="#f3dc8a"/></svg>';
+const pps=[...pl.querySelectorAll(".pp")];
+
+/* SCROLL */
+const root=document.documentElement,bar=document.getElementById("bar"),tl=document.getElementById("tl");
+function onS(){
+  const y=scrollY,h=root.scrollHeight-innerHeight;
+  bar.style.width=(h>0?y/h*100:0)+"%";
+  const pr=h>0?y/h:0,w=lo.offsetWidth,
+        lx=(.5+Math.sin(pr*18.85+1.2)*.38)*innerWidth-w/2,
+        ty=70+pr*(innerHeight-w-110);
+  lo.style.transform=`translate(${lx}px,${ty}px) rotate(${y*.35}deg)`;
+  const o=Math.max(0,Math.min(1,(pr-.55)/.4));
+  pps.forEach(q=>q.setAttribute("transform",`rotate(${q.dataset.g*o}) scale(${(.55+.45*o)*q.dataset.sc})`));
+  pl.classList.toggle("full",pr>.97);
+  pg.classList.toggle("on",y>innerHeight*.35);
+  root.style.setProperty("--p",Math.min(y,innerHeight));
+  root.style.setProperty("--gr",Math.min(1,.85+y/(innerHeight*5)));
+  const r=tl.getBoundingClientRect();
+  tl.style.setProperty("--ln",Math.max(0,Math.min(1,(innerHeight*.7-r.top)/r.height)));
+}
+addEventListener("scroll",onS,{passive:true});
+onS();
+
+/* COUNTDOWN */
+const TARGET=Date.UTC(2026,11,30,12,0,0); /* 30 Dec 2026 18:30 Myanmar time (UTC+6:30) */
+const cdD=document.getElementById("cdD"),cdH=document.getElementById("cdH"),
+      cdM=document.getElementById("cdM"),cdS=document.getElementById("cdS");
+const pad=n=>String(n).padStart(2,"0");
+function tick(){
+  let d=TARGET-Date.now();
+  if(d<0)d=0;
+  const s=Math.floor(d/1000);
+  cdD.textContent=pad(Math.floor(s/86400));
+  cdH.textContent=pad(Math.floor(s%86400/3600));
+  cdM.textContent=pad(Math.floor(s%3600/60));
+  cdS.textContent=pad(s%60);
+}
+tick();
+setInterval(tick,1000);
+
+/* COUNTERS + REVEAL */
+function count(c){
+  const t=+c.dataset.n,s=performance.now();
+  (function f(n){
+    const k=Math.min(1,(n-s)/1800);
+    c.textContent=Math.round(t*(1-Math.pow(1-k,3))).toLocaleString("en-US");
+    if(k<1)requestAnimationFrame(f);
+  })(s);
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add("in");
+    io.unobserve(e.target);
+    e.target.querySelectorAll("[data-n]").forEach(count);
+  }
+}),{threshold:.12});
+
+document.querySelectorAll(".sec").forEach(s=>["a","b"].forEach(c=>{
+  const d=document.createElement("div");
+  d.className="br "+c;
+  d.dataset.a="g";
+  d.innerHTML=branch();
+  s.appendChild(d);
+}));
+document.querySelectorAll("[data-a]").forEach(e=>io.observe(e));
+
+/* FETCH GUEST LIST */
+async function loadGuestList() {
+  const listEl = document.getElementById("names-list");
+  try {
+    const res = await fetch(SHEET_URL);
+    const data = await res.json();
+    
+    if (!Array.isArray(data) || data.length === 0) {
+      listEl.innerHTML = '<li class="empty-msg">အမည်များ မရှိသေးပါ။ ပထမဆုံး လိုက်မည့်သူ ဖြစ်ပါစေ။</li>';
+      return;
+    }
+    
+    listEl.innerHTML = data.map((item, index) => `
+      <li class="guest-item" style="animation-delay: ${index * 0.05}s">
+        <div class="guest-num">${data.length - index}</div>
+        <div class="guest-info">
+          <div class="guest-name">${item.name}</div>
+          ${item.time ? `<div class="guest-time">${item.time}</div>` : ''}
+        </div>
+        <div class="guest-check">✓</div>
+      </li>
+    `).join("");
+  } catch (e) {
+    console.error("Fetch error:", e);
+    listEl.innerHTML = '<li class="empty-msg" style="color:#ff8a8a;">စာရင်းကို ခေတ္တ မရယူနိုင်ပါ။ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။</li>';
+  }
+}
+// စာမျက်နှာစတင်ချိန်တွင် စာရင်းဆွဲမည်
+loadGuestList();
+
+/* SEND */
+let submitting = false;
+document.getElementById("sb").onclick=()=>{
+  if(submitting) return;
+  const n=document.getElementById("nm").value.trim(),
+        m=document.getElementById("msg"),b=document.getElementById("sb");
+  if(!n){m.textContent="အမည်ကို ဖြည့်ပေးပါ။";return}
+  
+  submitting = true;
+  if(SHEET_URL){
+    b.disabled=true;
+    m.textContent="ပို့နေပါသည်...";
+    fetch(SHEET_URL+"?"+new URLSearchParams({name:n,time:new Date().toLocaleString(),trip:"EFG Bagan Trip 30 Dec 2026"}),{mode:"no-cors"})
+      .then(()=>{
+        m.textContent="✓ ပို့ပြီးပါပြီ။ ကျေးဇူးတင်ပါသည်။";
+        document.getElementById("nm").value="";
+        // Google Sheet မှာ သိမ်းပြီးတဲ့အချိန်လေးစောင့်ပြီး စာရင်းပြန်ဆွဲမယ်
+        setTimeout(loadGuestList, 2000);
+      })
+      .catch(()=>{m.textContent="ပို့၍မရပါ။ ထပ်ကြိုးစားပါ။"})
+      .finally(()=>{
+        submitting = false;
+        setTimeout(()=>b.disabled=false,3000);
+      });
+    return;
+  }
+  
+  const f=document.createElement("form");
+  f.method="POST";
+  f.action="https://formsubmit.co/"+MAIL;
+  f.target="ifr";
+  f.acceptCharset="UTF-8";
+  [["Name",n],["Trip","EFG Bagan Trip 30 Dec 2026 – 2 Jan 2027"],
+   ["_subject","ပုဂံခရီးစဉ် – ငွေလွှဲပြီး: "+n],
+   ["_captcha","false"],["_template","table"]
+  ].forEach(([k,v])=>{
+    const i=document.createElement("input");
+    i.type="hidden";i.name=k;i.value=v;f.appendChild(i);
+  });
+  document.body.appendChild(f);
+  f.submit();
+  f.remove();
+  b.disabled=true;
+  m.innerHTML=`✓ ပို့ပြီးပါပြီ။ ကျေးဇူးတင်ပါသည်။<br><small><a href="mailto:${MAIL}?subject=${encodeURIComponent("ပုဂံခရီးစဉ် – "+n)}&body=${encodeURIComponent("အမည်: "+n)}">မရောက်ပါက Email app ဖြင့် ပို့ရန်</a></small>`;
+  document.getElementById("nm").value="";
+  setTimeout(()=>{
+    submitting = false;
+    b.disabled=false;
+  },4000);
+};
+</script></body></html>
